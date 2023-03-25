@@ -58,8 +58,8 @@ class Product extends Model
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',
         'type'  => 'string',
-        'camp_start'  => 'timestamp',
-        'camp_end'  => 'timestamp'
+        'camp_start'  => 'date:d-M',
+        'camp_end'  => 'date:d-M'
     ];
 
     /**

@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('customer_address_id')->references('id')->on('customer_addresses');
             $table->unsignedTinyInteger('payment_method')->comment('1=>Wallet,2=>COD');
             $table->unsignedDecimal('payment_amount',8,2);
+            $table->unsignedDecimal('advance_payment',8,2)->nullable();
             $table->unsignedDecimal('delivery_charge',8,2)->nullable();
             $table->unsignedInteger('delivery_charge_status')->default(1)->comment('1=>Unpaid,2=>Paid');
             $table->string('additional_info')->nullable();

@@ -28,29 +28,34 @@ class ProductRequest extends FormRequest
             'productName' => 'required|string|min:2|max:150',
             'regularPrice' => 'required|numeric|min:1',
             'productSlug' => "required|min:2|max:200|unique:products,product_slug,{$this->editId},id",
-            'productStock' => 'required|numeric|min:1',
+            'productStock' => 'required|numeric|min:0',
             'productUnit' => 'required|string|min:1',
             'productCategory.*' => 'required',
             'productSubCategory.*' => 'required',
-//            'productBrands.*' => 'required',
+            //            'productBrands.*' => 'required',
             'product_tags.*' => 'required',
             'productDisplay.*' => 'required',
             'productDescription' => 'required|string|min:5',
             'additionalInfo' => 'nullable|string|min:5',
+
+            'type' => 'nullable|string',
+            'camp_start' => 'nullable',
+            'camp_end' => 'nullable',
         ];
-        if ($this->productImage){
+
+        if ($this->productImage) {
             $productCheckArray['productImage'] = 'required|image|mimes:png,jpg,jpeg,PNG,JPG,JPEG';
         }
-        if ($this->otherImage1){
+        if ($this->otherImage1) {
             $productCheckArray['otherImage1'] = 'required|image|mimes:png,jpg,jpeg,PNG,JPG,JPEG';
         }
-        if ($this->otherImage2){
+        if ($this->otherImage2) {
             $productCheckArray['otherImage2'] = 'required|image|mimes:png,jpg,jpeg,PNG,JPG,JPEG';
         }
-        if ($this->salePrice){
+        if ($this->salePrice) {
             $productCheckArray['salePrice'] = 'required|numeric|min:1';
         }
-        if ($this->method() == 'PATCH'){
+        if ($this->method() == 'PATCH') {
             $productCheckArray['editId'] = 'required|integer|min:1|exists:products,id';
         }
         return $productCheckArray;

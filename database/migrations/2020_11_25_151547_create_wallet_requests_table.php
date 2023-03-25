@@ -17,7 +17,7 @@ class CreateWalletRequestsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('request_id',100);
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('mobile');
             $table->unsignedDecimal('amount',8,2);
             $table->string('txn_id');

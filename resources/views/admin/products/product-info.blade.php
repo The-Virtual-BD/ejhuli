@@ -162,12 +162,12 @@
                                     <div class="tab-pane" id="campaign_info">
                                         <p class="lead">Campaign Information</p>
                                         <div class="">
-                                            <p>Campaign Start Date : </p>
+                                            <p>Campaign Start Date : {{date('d-M-Y',$productItem->camp_start)}}</p>
                                         </div>
                                         <div class="">
-                                            <p>Campaign End Date : </p>
+                                            <p>Campaign End Date : {{date('d-M-Y',$productItem->camp_end)}}</p>
                                         </div>
-                                        {{strip_tags($productItem->additional_info)}}
+
                                     </div>
                                 </div>
                             </div>

@@ -16,7 +16,7 @@ class CreateOrderProcessingsTable extends Migration
         Schema::create('order_processings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->text('remark');
             $table->unsignedTinyInteger('status')->comment('1=>Ordered,2=>Confirmed,3=>Delivered');
             $table->dateTime('processing_date');

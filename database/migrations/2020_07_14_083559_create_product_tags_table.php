@@ -16,7 +16,7 @@ class CreateProductTagsTable extends Migration
         Schema::create('product_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->longText('tag_ids');
         });
     }

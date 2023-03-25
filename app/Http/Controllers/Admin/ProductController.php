@@ -65,6 +65,9 @@ class ProductController extends AdminBaseController
             'product_display'=>implode(',',$productRequest->productDisplay),
             'description' => $productRequest->productDescription,
             'additional_info' => $productRequest->additionalInfo,
+            'type' => $productRequest->type,
+            'camp_start' => $productRequest->camp_start,
+            'camp_end' => $productRequest->camp_end,
 
         ];
         DB::beginTransaction();
