@@ -292,7 +292,7 @@ function getPreeOrderProducts() {
                 }
             });
 
-            $("#loaded_products").html(categoryProductsHtml);
+            $("#preeorder_products").html(categoryProductsHtml);
             $.each(categorySlugArray, function (keySlug, category_slug) {
                 $('#' + category_slug).owlCarousel({
                     navigation: true, // Show next and prev buttons

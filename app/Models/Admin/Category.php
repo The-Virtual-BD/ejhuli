@@ -12,7 +12,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['category', 'category_slug', 'description','icon_class','status','navigation'];
+    protected $fillable = ['category', 'category_slug', 'description', 'icon_class', 'status', 'navigation'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -53,17 +53,17 @@ class Category extends Model
      * @purpose admin
      * @return collection
      */
-   public static function saveCategory($categoryRequest)
-   {
-       $categoryData = [
-           'category' => ucwords($categoryRequest->category),
-           'category_slug'=> Str::slug($categoryRequest->category),
-           'icon_class' => $categoryRequest->categoryIcon,
-           'navigation' => $categoryRequest->navigation,
-           'description' => $categoryRequest->description
-       ];
-       return self::updateOrCreate(['id' => $categoryRequest->editId],$categoryData);
-   }
+    public static function saveCategory($categoryRequest)
+    {
+        $categoryData = [
+            'category' => ucwords($categoryRequest->category),
+            'category_slug' => Str::slug($categoryRequest->category),
+            'icon_class' => $categoryRequest->categoryIcon,
+            'navigation' => $categoryRequest->navigation,
+            'description' => $categoryRequest->description
+        ];
+        return self::updateOrCreate(['id' => $categoryRequest->editId], $categoryData);
+    }
 
     /**
      * This function returns all the categories by default active
@@ -71,24 +71,30 @@ class Category extends Model
      * @purpose admin
      * @return collection
      */
-   public static function getCategoryList($request)
-   {
-       $categoryStatus = $request->categoryStatus;
-       $navigationStatus = $request->navigationStatus;
-       $categorySearch = $request->categorySearch;
-       return self::select('categories.id', 'categories.category as category_name','categories.description',
-           'categories.category_slug','categories.status',
-           'categories.icon_class','categories.navigation')
-           ->when($categorySearch, function ($nameQuery) use ($categorySearch) {
-               return $nameQuery->where('categories.category', 'like','%'. $categorySearch . '%');
-           })
-           ->where('categories.status',$categoryStatus)
-           ->when($navigationStatus, function ($navQuery) use ($navigationStatus) {
-               return $navQuery->where('categories.navigation',$navigationStatus);
-           })
-           ->orderBy('id', 'DESC')
-           ->get();
-   }
+    public static function getCategoryList($request)
+    {
+        $categoryStatus = $request->categoryStatus;
+        $navigationStatus = $request->navigationStatus;
+        $categorySearch = $request->categorySearch;
+        return self::select(
+            'categories.id',
+            'categories.category as category_name',
+            'categories.description',
+            'categories.category_slug',
+            'categories.status',
+            'categories.icon_class',
+            'categories.navigation'
+        )
+            ->when($categorySearch, function ($nameQuery) use ($categorySearch) {
+                return $nameQuery->where('categories.category', 'like', '%' . $categorySearch . '%');
+            })
+            ->where('categories.status', $categoryStatus)
+            ->when($navigationStatus, function ($navQuery) use ($navigationStatus) {
+                return $navQuery->where('categories.navigation', $navigationStatus);
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
+    }
 
     /**
      * This function deletes the category means updates the status->3
@@ -96,15 +102,15 @@ class Category extends Model
      * @purpose admin
      * @return collection
      */
-   public static function deleteCategory($request)
-   {
-       return self::where('id',$request->categoryId)->update(['status'=>3]);
-   }
+    public static function deleteCategory($request)
+    {
+        return self::where('id', $request->categoryId)->update(['status' => 3]);
+    }
 
-  public function subCategories()
-   {
-       return $this->hasMany(SubCategory::class,'category_id','id');
-   }
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id', 'id');
+    }
 
     /**
      * This is a relationship to get products of each category
@@ -112,15 +118,19 @@ class Category extends Model
      * @purpose customer page
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-  public function categoryProducts()
-  {
-      return $this->hasMany(CategoryProduct::class,'category_id','id')
-          ->join('products','category_products.product_id','products.id');
+    public function categoryProducts()
+    {
+        return $this->hasMany(CategoryProduct::class, 'category_id', 'id')
+            ->join('products', 'category_products.product_id', 'products.id');
+    }
+    public function product()
+    {
+        return $this->hasMany(SubCategoryProduct::class, 'sub_category_id', 'id');
+    }
 
-  }
-  public function product()
-  {
-      return $this->hasMany(SubCategoryProduct::class,'sub_category_id','id');
-  }
 
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class,CategoryProduct::class);
+    }
 }

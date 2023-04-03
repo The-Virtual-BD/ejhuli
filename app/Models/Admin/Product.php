@@ -99,4 +99,10 @@ class Product extends Model
        return self::whereId($productId)->increment('total_reviews');
     }
 
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,CategoryProduct::class);
+    }
+
 }
