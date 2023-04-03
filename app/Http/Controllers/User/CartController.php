@@ -30,6 +30,8 @@ class CartController extends UserBaseController
      */
     public function createCart(Request $createRequest)
     {
+        return Response::json(['status'=>'checking','message'=>'This is a Preeorder Product.','data' => $createRequest->productType]);
+
         $getProductPrice = Product::select('regular_price','sale_price','product_slug')->where('id',$createRequest->productId)->first();
         $product = [
             'id' => $createRequest->productId,

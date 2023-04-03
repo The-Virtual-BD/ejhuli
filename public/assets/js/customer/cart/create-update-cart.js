@@ -5,11 +5,13 @@ $(document).ready(function () {
 });
 
 function addToCart(arg) {
+
     var productId = $(arg).attr('data-product-id');
     var productName = $(arg).attr('data-product-name');
     var productPrice = $(arg).attr('data-product-price');
     var productQuantity = $(arg).attr('data-product-qty');
     var productImage = $(arg).attr('data-product-image');
+    var productType = $(arg).attr('data-product-type');
     var addToCartSpinnerId = $(arg).attr('data-spinner-id');
     $('#addToCartSpinner'+addToCartSpinnerId).removeClass('d-none');
     $.ajax({
@@ -26,6 +28,8 @@ function addToCart(arg) {
             if (response.status == 'success'){
                 toastr.success(response.message);
                 getCart();
+            }else if (response.status == 'checking') {
+                toastr.error(response.message);
             }
         },
         error:function (error) {
