@@ -112,6 +112,9 @@
                         <div class="form-group mb-0">
                             <textarea rows="5" name="additional_info" id="additional_info" class="form-control" placeholder="Order notes"></textarea>
                         </div>
+                        <div class="form-group mb-0">
+                            <p>On pree Order, product will be delivered within (20-25) days after confirming order.</p>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="order_review">
@@ -142,30 +145,32 @@
                                     @endif
                                 </div>
                                 @if ($deliveryChargeAdvance == 'Yes')
-
-                                <div class="heading_s1">
-                                    <h4>Delivery Charge Payment</h4>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span>Dont Know How!</span>
-
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-sm btn-fill-out mx-2" data-toggle="modal" data-target="#exampleModal">
-                                        See How
-                                    </button>
-                                </div>
-
-                                <div class="payment_option mt-3">
-                                    <div class="custome-radio">
-                                        <label class="form-label" for="cod">BKash Transaction ID</label>
-                                        <input class="form-control" type="text" name="advance_transaction" id="advance_transaction" >
-                                        <p data-method="cod" class="payment-text">Please provide your BKash Transaction
-                                            ID here to complete the Delivery Charge Payment.</p>
-
-
-
+                                    <div class="heading_s1">
+                                        <h4>Delivery Charge/Advance Payment</h4>
+                                        <ul class="ml-3">
+                                            <li>For normal order pay delivery change.</li>
+                                            <li>For preeorder please pay 30% of the product Price.</li>
+                                        </ul>
                                     </div>
-                                </div>
+                                    <div class="d-flex align-items-center">
+                                        <span>Dont Know How!</span>
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-sm btn-fill-out mx-2" data-toggle="modal"
+                                            data-target="#exampleModal">
+                                            See How
+                                        </button>
+                                    </div>
+
+                                    <div class="payment_option mt-3">
+                                        <div class="custome-radio">
+                                            <label class="form-label" for="cod">BKash Transaction ID</label>
+                                            <input class="form-control" type="text" name="advance_transaction_number"
+                                                id="advance_transaction_number" required>
+                                            <p data-method="cod" class="payment-text">Please provide your BKash Transaction
+                                                ID here to complete the Delivery Charge Payment.</p>
+                                        </div>
+                                    </div>
                                 @endif
 
                             </div>
@@ -183,12 +188,12 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
-                    </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="ti-close"></i>
+                        </button>
                     </div>
                     <div class="modal-body">
-                        <img src="{{asset('assets/images/bkashpayment.jpg')}}" alt="Bkash Payment" srcset="">
+                        <img src="{{ asset('assets/images/bkashpayment.jpg') }}" alt="Bkash Payment" srcset="">
                     </div>
                 </div>
             </div>

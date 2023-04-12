@@ -131,6 +131,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasManyThrough(Product::class,CategoryProduct::class);
+        return $this->hasManyThrough(Product::class,CategoryProduct::class,'category_id');
     }
 }

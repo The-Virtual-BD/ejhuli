@@ -155,6 +155,7 @@ class Order extends Model
             'delivery_charge' => $deliveryCharge,
             'additional_info' => $checkoutRequest->additional_info,
             'discounts' => $conditions,
+            'advance_transaction_number' => $checkoutRequest->advance_transaction_number,
         ];
         DB::beginTransaction();
         $order = self::create($checkoutData);

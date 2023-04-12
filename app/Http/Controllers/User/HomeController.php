@@ -39,9 +39,10 @@ class HomeController extends UserBaseController
     public function getCategoryWiseProducts()
     {
         $categoryProducts = Category::select('id','category','category_slug')
-            ->with('categoryProducts:category_id,products.id,product_name,product_slug,sku,regular_price,sale_price,stock,product_image,product_image_1,product_image_2,description,average_rating,total_reviews,stock,camp_start,camp_end')
-            // ->where('product.type',1)
+            ->with('categoryProducts:category_id,products.id,product_name,product_slug,sku,type,regular_price,sale_price,stock,product_image,product_image_1,product_image_2,description,average_rating,total_reviews,stock,camp_start,camp_end')
             ->get();
+        // $categories = Category::with('products')->get();
+        // return Response::json(['status'=>'success','data'=>$categories]);
         return Response::json(['status'=>'success','data'=>$categoryProducts]);
     }
 }

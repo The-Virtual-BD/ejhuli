@@ -13,6 +13,7 @@ function getHomePageProducts() {
         url: BASE_URL + 'get-home-page-products',
         success: function (response) {
             $.each(response.data, function (keyCategory, valueCategory) {
+                console.log(response.data);
                 categorySlugArray.push(valueCategory.category_slug);
                 if (valueCategory.category_products.length) {
                     var viewAllLink = BASE_URL + 'products/' + valueCategory.category_slug;
@@ -45,6 +46,7 @@ function getHomePageProducts() {
                         }
                         var priceForCart = ((value2.sale_price ? value2.sale_price : value2.regular_price));
                         var productType = value2.type;
+                        console.log('Product'+ value2.id+' product type'+ productType);
                         var campaignStar = new Date(value2.camp_start).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                         var campaignEnd = new Date(value2.camp_end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                         var randomBtnId = makeid(5);

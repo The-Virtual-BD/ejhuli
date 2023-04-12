@@ -26,6 +26,7 @@ class CheckoutRequest extends FormRequest
         $checkoutArray =  [
            'address_option' => 'required',
            'payment_option' => 'required',
+           'advance_transaction_number' => 'required|string',
            'additional_info' => 'nullable|string',
         ];
         return $checkoutArray;
